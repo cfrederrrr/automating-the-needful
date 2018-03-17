@@ -2,7 +2,7 @@
 
 I wanted to monitor some network usage on my windows desktop and wasn't happy with the offerings on the net.
 Also wanted to see how well these 3 fit together.
-Turns out very well - all of this, including the writeup only took 2 hours to figure out from start to finish, despite never having much reason/opportunity to mess with docker before.
+Turns out very well - all of this, including the writeup and some front-end configuration only took 2 hours to figure out from start to finish, despite never having much reason/opportunity to mess with docker before.
 
 1. Set env variables
 
