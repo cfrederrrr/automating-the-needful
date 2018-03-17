@@ -1,5 +1,9 @@
 # Docker Zabbix Stack
 
+I wanted to monitor some network usage on my windows desktop and wasn't happy with the offerings on the net.
+Also wanted to see how well these 3 fit together.
+Turns out very well - all of this, including the writeup only took 2 hours to figure out from start to finish, despite never having much reason/opportunity to mess with docker before.
+
 1. Set env variables
 
     ```shell
@@ -36,7 +40,7 @@
 1. Set root users's mysql password to something else and create zabbix user
 
     ```sql
-    ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}'
+    ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}';
     CREATE USER 'zabbix'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
     GRANT ALL PRIVILEGES ON *.* TO 'zabbix'@'%';
     quit;
