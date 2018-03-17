@@ -1,9 +1,10 @@
 # Docker Zabbix Stack
 
-1. Set localhost variable
+1. Set env variables
 
     ```shell
     LOCALHOST="127.0.0.1"
+    MYSQL_PASSWORD="abc123"
     ```
 
 1. Pull all resources
@@ -35,8 +36,8 @@
 1. Set root users's mysql password to something else and create zabbix user
 
     ```sql
-    ALTER USER 'root'@'localhost' IDENTIFIED BY 'REDACTED'
-    CREATE USER 'zabbix'@'%' IDENTIFIED BY '6a61d727e3d0b418a2e2d56142294b756a1dbebc';
+    ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}'
+    CREATE USER 'zabbix'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
     GRANT ALL PRIVILEGES ON *.* TO 'zabbix'@'%';
     quit;
     ```
@@ -56,7 +57,7 @@
       -p "0.0.0.0:10050:10050" \
       -e DB_SERVER_HOST="172.17.0.2" \
       -e MYSQL_USER="zabbix" \
-      -e MYSQL_PASSWORD="6a61d727e3d0b418a2e2d56142294b756a1dbebc" \
+      -e MYSQL_PASSWORD="${MYSQL_PASSWORD}" \
       -d \
       zabbix/zabbix-server-mysql:latest
     ```
@@ -75,7 +76,7 @@
       -p "0.0.0.0:26080:80" \
       -e DB_SERVER_HOST="172.17.0.2" \
       -e MYSQL_USER="zabbix" \
-      -e MYSQL_PASSWORD="6a61d727e3d0b418a2e2d56142294b756a1dbebc" \
+      -e MYSQL_PASSWORD="${MYSQL_PASSWORD}" \
       -e ZBX_SERVER_HOST="172.17.0.3" \
       -e PHP_TZ="EST" \
       -d \
